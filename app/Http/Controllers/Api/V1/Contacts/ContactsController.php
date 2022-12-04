@@ -76,14 +76,14 @@ class ContactsController extends Controller
             ->setStatusCode(ResponseAlias::HTTP_OK);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
 
+    public function destroy(int $id)
+    {
+        $result = $this->contactRepository->delete($id);
+
+        if(!$result){
+            return \Response::json([], ResponseAlias::HTTP_NO_CONTENT);
+        }
+        return \Response::json([], ResponseAlias::HTTP_NO_CONTENT);
     }
 }

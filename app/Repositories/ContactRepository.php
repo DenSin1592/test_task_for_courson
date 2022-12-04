@@ -47,6 +47,17 @@ class ContactRepository extends AbstractRepository
     }
 
 
+    public function delete(int $id)
+{
+    $model = $this->getBuilder()
+        ->where('id', $id)
+        ->where('user_id', \Auth::id())
+        ->first();;
+
+    return $model->delete();
+}
+
+
     public function findOrFail(int $id): Model
     {
         return $this->getBuilder()->where('user_id', \Auth::id())->findOrFail($id);

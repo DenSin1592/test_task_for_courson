@@ -75,7 +75,7 @@ export default {
             axios.get('/sanctum/csrf-cookie').then(response => {
                 axios.post('/api/v1/contact', {name: this.name, phone: this.phone, favorite: this.favorite})
                     .then(r => {
-                         if(r?.status === 200 || r?.status === 204){
+                         if(r?.status === 200 || r?.status === 201 || r?.status === 204){
                                this.$router.push({name: 'contact.index'})
                          }
                     })

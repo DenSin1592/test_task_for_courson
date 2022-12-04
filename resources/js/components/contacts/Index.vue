@@ -14,6 +14,7 @@
                     <th>Phone number</th>
                     <th>Favorite</th>
                     <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -24,7 +25,8 @@
                         <router-link :to="{ name: 'contact.show', params: {id:contact.id}}"> {{ contact.phone }}</router-link>
                     </td>
                     <td>{{ contact.favorite ? 'Favorite' : '' }}</td>
-                    <td><router-link :to="{ name: 'contact.update', params: {id:contact.id}}">Редактировать</router-link></td>
+                    <td><router-link :to="{ name: 'contact.update', params: {id:contact.id}}">Update</router-link></td>
+                    <td><a class="link-danger" href="#" @click.prevent="deleteContact(contact.id)" >Delete</a></td>
                 </tr>
                 </tbody>
             </table>
@@ -75,6 +77,14 @@ export default {
         },
         atFavorite() {
             this.$router.push({name: 'contact.favorite'})
+        },
+        deleteContact(id) {
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.delete(`/api/v1/contact/${id}`)
+                    .then(r => {
+                        this.getData();
+                    })
+            })
         }
     }
 }
