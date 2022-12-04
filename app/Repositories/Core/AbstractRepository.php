@@ -16,7 +16,7 @@ abstract class AbstractRepository
         $this->setModel();
     }
 
-    protected function getModel(): \Illuminate\Database\Eloquent\Builder
+    protected function getBuilder(): \Illuminate\Database\Eloquent\Builder
     {
         return (clone $this->model)->query();
     }

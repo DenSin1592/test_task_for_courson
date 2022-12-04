@@ -11,6 +11,7 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Phone number</th>
+                    <th>Favorite</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -18,12 +19,17 @@
                     <td>{{ contact.id }}</td>
                     <td>{{ contact.name }}</td>
                     <td>{{ contact.phone }}</td>
-
-
+                    <td>{{ contact.favorite ? 'Favorite' : '' }}</td>
                 </tr>
-
                 </tbody>
             </table>
+        </div>
+        <div class="mb-0">
+
+                <button @click.prevent="addContact" type="submit" class="btn btn-success">
+                    Add contact
+                </button>
+
         </div>
     </main>
 
@@ -45,11 +51,13 @@ export default {
 
     methods: {
         getData() {
-            axios.get('/api/v1/contacts')
+            axios.get('/api/v1/contact')
                 .then(response => {
                     this.listContacts = response.data;
                 })
-
+        },
+        addContact() {
+            this.$router.push({name: 'contact.create'})
         }
     }
 }

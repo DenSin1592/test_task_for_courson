@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 class MainController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
-        return view('main');
+        if(\Request::ajax() || \Request::header('accept') === 'application/json'){
+            return \Response::json([], 404);
+        }
+
+        return \View::make('main');
     }
 }

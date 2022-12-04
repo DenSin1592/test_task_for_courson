@@ -46,7 +46,7 @@ export default {
             this.$el.querySelector('button[type="submit"]').setAttribute('disabled', 'disabled')
             axios.get('/sanctum/csrf-cookie').then(response => {
                 axios.post('/password/email', {email: this.email})
-                    .then(response => {
+                    .then(r => {
                         this.$router.push({name: 'user.login'})
                     })
             });

@@ -17,4 +17,9 @@ class ContactRepository extends AbstractRepository
     {
         return \Auth::user()->contacts;
     }
+
+    public function create(array $data): void
+    {
+        $this->getBuilder()->create($data);
+    }
 }
