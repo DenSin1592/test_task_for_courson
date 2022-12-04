@@ -31,6 +31,10 @@ const router = new VueRouter({
             name: 'contact.index'
         },
         {
+            path: '/contact/favorite', component: () => import('./components/contacts/IndexFavorite'),
+            name: 'contact.favorite'
+        },
+        {
             path: '/contact/create', component: () => import('./components/contacts/Create'),
             name: 'contact.create'
         },

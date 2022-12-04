@@ -41,6 +41,14 @@ class ContactsController extends Controller
     }
 
 
+    public function indexFavorite(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    {
+        $cont = $this->contactRepository->allFavoriteForUser();
+
+        return ContactResource::collection($cont);
+    }
+
+
     public function store(ContactRequest $request): \Illuminate\Http\JsonResponse
     {
         $this->contactRepository->create($request->validated());

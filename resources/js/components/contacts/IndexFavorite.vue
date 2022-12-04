@@ -1,7 +1,6 @@
 <template>
     <main class="container">
-        <div
-            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Телефонный справочник</h1>
         </div>
 
@@ -27,29 +26,27 @@
                 </tbody>
             </table>
         </div>
-
         <div class="mb-0">
 
             <div class="row ">
-                <div class="col-md-6 offset-md-4">
+                <div class="col-md-8 offset-md-4">
                     <button @click.prevent="addContact" type="submit" class="btn btn-success">
                         Add contact
                     </button>
-                    <button type="submit" class="btn btn-primary" @click.prevent="atFavorite">
-                        At favorite
+                    <button type="submit" class="btn btn-primary" @click.prevent="atHome">
+                        At home
                     </button>
                 </div>
             </div>
 
         </div>
-
     </main>
 
 </template>
 
 <script>
 export default {
-    name: "Index",
+    name: "IndexFavorite",
 
     data() {
         return {
@@ -63,7 +60,7 @@ export default {
 
     methods: {
         getData() {
-            axios.get('/api/v1/contact')
+            axios.get('/api/v1/contact/favorite')
                 .then(response => {
                     this.listContacts = response.data;
                 })
@@ -71,8 +68,8 @@ export default {
         addContact() {
             this.$router.push({name: 'contact.create'})
         },
-        atFavorite() {
-            this.$router.push({name: 'contact.favorite'})
+        atHome(){
+            this.$router.push({name: 'contact.index'})
         }
     }
 }

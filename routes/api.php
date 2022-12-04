@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(static function() {
 
     Route::prefix('v1')->namespace('V1')->name('v1.')->group(static function(){
-        Route::resource('/contact', 'Contacts\ContactsController')->except(['create']);
+        Route::get('/contact/favorite', 'Contacts\ContactsController@indexFavorite')->name('index.favorite');
+        Route::resource('/contact', 'Contacts\ContactsController')->except(['create', 'edit']);
     });
 
 });

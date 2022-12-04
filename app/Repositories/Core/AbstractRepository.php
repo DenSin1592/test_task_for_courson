@@ -3,6 +3,7 @@
 namespace App\Repositories\Core;
 
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\Builder;
 
 
 abstract class AbstractRepository
@@ -16,7 +17,7 @@ abstract class AbstractRepository
         $this->setModel();
     }
 
-    protected function getBuilder(): \Illuminate\Database\Eloquent\Builder
+    protected function getBuilder(): Builder
     {
         return (clone $this->model)->query();
     }
