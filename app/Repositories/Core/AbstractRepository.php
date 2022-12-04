@@ -21,4 +21,9 @@ abstract class AbstractRepository
     {
         return (clone $this->model)->query();
     }
+
+    public function findOrFail(int $id): Model
+    {
+        return $this->getBuilder()->findOrFail($id);
+    }
 }

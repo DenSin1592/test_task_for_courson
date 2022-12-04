@@ -19,9 +19,9 @@ Route::middleware('auth:sanctum')->group(static function() {
     Route::prefix('v1')->namespace('V1')->name('v1.')->group(static function(){
 
         Route::namespace('Contacts')->group(static function(){
-            Route::get('/contact/favorite', 'ContactsController@indexFavorite')->name('index.favorite');
-            Route::patch('/contact/favorite/{id}', 'ContactsController@updateFavorite')->name('index.favorite');
-            Route::resource('/contact', 'ContactsController')->except(['create', 'edit']);
+            Route::get('/contact/favorite', 'ContactsController@indexFavorite')->name('contact.favorite');
+            Route::patch('/contact/favorite/{id}', 'ContactsController@updateFavorite')->name('contact.favorite');
+            Route::apiResource('/contact', 'ContactsController');
         });
 
     });

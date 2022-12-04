@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Console\AbstractCommand;
-use App\Models\User;
+use App\Repositories\UserRepository;
 
 
 class ApiTokenGeneration extends AbstractCommand
@@ -13,13 +13,20 @@ class ApiTokenGeneration extends AbstractCommand
     protected $signature = self::SIGNATURE;
     protected $description = 'Api user token generate';
 
+
+    public function __construct(
+        private readonly UserRepository $userRepository,
+    )
+    {
+        parent::__construct();
+    }
+
+
     public function handleCommand(): void
     {
         $userId = $this->argument('user');
-
-        $token = (User::find($userId))?->createToken('api_token');
-
+        $user = $this->userRepository->findOrFail($userId);
+        $token = $user->createToken('api_token');
         $this->info('Bearer '. $token->plainTextToken);
-
     }
 }

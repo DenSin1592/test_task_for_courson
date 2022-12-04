@@ -14,11 +14,11 @@ use OpenApi\Annotations as OA;
  *     ),
  * )
  * @OA\Tag(
- *     name="Contacts",
+ *     name="Contact",
  *     description="Contacts",
  * )
  * @OA\Server(
- *     description="API server",
+ *     description="Contact List API server",
  *     url="http://localhost:3000/api/v1"
  * )
  * @OA\SecurityScheme(

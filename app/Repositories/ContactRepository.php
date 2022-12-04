@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 
-class ContactRepository extends AbstractRepository
+final class ContactRepository extends AbstractRepository
 {
 
     protected function setModel(): void
@@ -31,7 +31,7 @@ class ContactRepository extends AbstractRepository
 
     public function create(array $data): Model
     {
-        return $this->getBuilder()->create($data);
+        return $this->getBuilder()->create([...$data, ...['user_id' => \Auth::id()]]);
     }
 
 
@@ -47,15 +47,15 @@ class ContactRepository extends AbstractRepository
     }
 
 
-    public function delete(int $id)
-{
-    $model = $this->getBuilder()
-        ->where('id', $id)
-        ->where('user_id', \Auth::id())
-        ->first();;
+    public function delete(int $id): bool|null
+    {
+        $model = $this->getBuilder()
+            ->where('id', $id)
+            ->where('user_id', \Auth::id())
+            ->first();
 
-    return $model->delete();
-}
+        return $model?->delete();
+    }
 
 
     public function findOrFail(int $id): Model
