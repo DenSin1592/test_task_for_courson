@@ -9,6 +9,7 @@ use App\Repositories\ContactRepository;
 use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
 
+
 class ContactsController extends Controller
 {
 
@@ -39,6 +40,7 @@ class ContactsController extends Controller
         return ContactResource::collection($cont);
     }
 
+
     public function store(ContactRequest $request): \Illuminate\Http\JsonResponse
     {
         $this->contactRepository->create($request->validated());
@@ -46,15 +48,10 @@ class ContactsController extends Controller
         return \Response::json([], 204);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
 
+    public function show(int $id): ContactResource
+    {
+        return new ContactResource($this->contactRepository->findOrFail($id));
     }
 
 

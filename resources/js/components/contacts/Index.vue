@@ -18,7 +18,9 @@
                 <tr v-for="contact in listContacts" :key="contact.id">
                     <td>{{ contact.id }}</td>
                     <td>{{ contact.name }}</td>
-                    <td>{{ contact.phone }}</td>
+                    <td>
+                        <router-link :to="{ name: 'contact.show', params: {id:contact.id}}"> {{ contact.phone }}</router-link>
+                    </td>
                     <td>{{ contact.favorite ? 'Favorite' : '' }}</td>
                 </tr>
                 </tbody>
@@ -58,7 +60,7 @@ export default {
         },
         addContact() {
             this.$router.push({name: 'contact.create'})
-        }
+        },
     }
 }
 </script>

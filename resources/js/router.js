@@ -29,9 +29,14 @@ const router = new VueRouter({
         {
             path: '/contact', component: () => import('./components/contacts/Index'),
             name: 'contact.index'
-        },{
+        },
+        {
             path: '/contact/create', component: () => import('./components/contacts/Create'),
             name: 'contact.create'
+        },
+        {
+            path: '/contact/:id', component: () => import('./components/contacts/Show'),
+            name: 'contact.show'
         },
 
     ]

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Contact;
 use App\Repositories\Core\AbstractRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class ContactRepository extends AbstractRepository
 {
@@ -21,5 +22,10 @@ class ContactRepository extends AbstractRepository
     public function create(array $data): void
     {
         $this->getBuilder()->create($data);
+    }
+
+    public function findOrFail(int $id): Model
+    {
+        return $this->getBuilder()->where('user_id', \Auth::id())->findOrFail($id);
     }
 }
