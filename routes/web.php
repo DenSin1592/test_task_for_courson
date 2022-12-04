@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('{page}', 'MainController')->where('page', '.*');
+Route::any('{page}', 'MainController')->where('page', '.*');

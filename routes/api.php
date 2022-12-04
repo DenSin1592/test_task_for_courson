@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(static function() {
 
     Route::prefix('v1')->namespace('V1')->name('v1.')->group(static function(){
-        Route::get('/contacts', 'Contacts\ContactsController')->name('contacts');
+        Route::resource('/contacts', 'Contacts\ContactsController');
     });
 
 });
+
+Route::get('{url}', static function() { return \Response::json([], 404);})->where('url', '.*');
