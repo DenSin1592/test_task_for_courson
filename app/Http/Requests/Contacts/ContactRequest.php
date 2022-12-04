@@ -22,7 +22,7 @@ class ContactRequest extends FormRequest
     {
         $rules = [
             'name' => 'nullable|string',
-            'phone' => ['required', 'string', 'min:7', 'max:14', new PhoneNumber()],
+            'phone' => ['required', 'string', new PhoneNumber()],
             'favorite' => ContactFavoriteRequest::RULES,
         ];
 

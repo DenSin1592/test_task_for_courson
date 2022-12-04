@@ -30,6 +30,13 @@ class ContactsController extends Controller
      *     @OA\Response(
      *         response="200",
      *         description="Everything is fine",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref="#/components/schemas/ContactRequest"),
+     *             )
+     *         )
      *     ),
      *     @OA\Response(
      *         response="404",
@@ -67,6 +74,13 @@ class ContactsController extends Controller
      *     @OA\Response(
      *         response="200",
      *         description="Everything is fine",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="array",
+     *                 @OA\Items(ref="#/components/schemas/ContactRequest"),
+     *             )
+     *         )
      *     ),
      *     @OA\Response(
      *         response="404",
@@ -108,6 +122,7 @@ class ContactsController extends Controller
      *      @OA\Response(
      *         response="201",
      *         description="Operation was success",
+     *         @OA\JsonContent(ref="#/components/schemas/ContactRequest")
      *     ),
      *     @OA\Response(
      *         response="422",
@@ -148,6 +163,7 @@ class ContactsController extends Controller
      *     @OA\Response(
      *         response="200",
      *         description="Everything is fine",
+     *         @OA\JsonContent(ref="#/components/schemas/ContactRequest")
      *     ),
      *     @OA\Response(
      *         response="404",
@@ -196,6 +212,7 @@ class ContactsController extends Controller
      *     @OA\Response(
      *         response="200",
      *         description="Everything is fine",
+     *         @OA\JsonContent(ref="#/components/schemas/ContactRequest")
      *     ),
      *     @OA\Response(
      *         response="404",
@@ -244,6 +261,7 @@ class ContactsController extends Controller
      *     @OA\Response(
      *         response="200",
      *         description="Everything is fine",
+     *         @OA\JsonContent(ref="#/components/schemas/ContactRequest")
      *     ),
      *     @OA\Response(
      *         response="404",
@@ -286,7 +304,7 @@ class ContactsController extends Controller
      *         ),
      *     ),
      *     @OA\Response(
-     *         response="200",
+     *         response="202",
      *         description="Everything is fine",
      *     ),
      *     @OA\Response(

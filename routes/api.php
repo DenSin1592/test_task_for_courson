@@ -28,4 +28,4 @@ Route::middleware('auth:sanctum')->group(static function() {
 
 });
 
-Route::get('{url}', static function() { return \Response::json([], ResponseAlias::HTTP_NOT_FOUND);})->where('url', '.*');
+Route::any('{url}', static function() { return \Response::json([], ResponseAlias::HTTP_NOT_FOUND);})->where('url', '.*');

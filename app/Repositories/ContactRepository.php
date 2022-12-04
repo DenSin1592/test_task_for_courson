@@ -38,9 +38,9 @@ final class ContactRepository extends AbstractRepository
     public function update(int $id, array $data): Model
     {
         $model = $this->getBuilder()
-            ->where('id', $id)
             ->where('user_id', \Auth::id())
-            ->first();
+            ->findOrFail($id);
+
         $model->update($data);
 
         return $model;
