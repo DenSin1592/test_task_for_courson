@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Contacts;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ContactRequest;
+use App\Http\Requests\Contacts\ContactFavoriteRequest;
+use App\Http\Requests\Contacts\ContactRequest;
 use App\Http\Resources\ContactResource;
 use App\Repositories\ContactRepository;
 use OpenApi\Annotations as OA;
@@ -70,6 +71,14 @@ class ContactsController extends Controller
 
 
     public function update(ContactRequest $request, int $id): \Illuminate\Http\JsonResponse
+    {
+        return (new ContactResource($this->contactRepository->update($id, $request->validated())))
+            ->response()
+            ->setStatusCode(ResponseAlias::HTTP_OK);
+    }
+
+
+    public function updateFavorite(ContactFavoriteRequest $request, int $id): \Illuminate\Http\JsonResponse
     {
         return (new ContactResource($this->contactRepository->update($id, $request->validated())))
             ->response()

@@ -24,7 +24,11 @@
                     <td>
                         <router-link :to="{ name: 'contact.show', params: {id:contact.id}}"> {{ contact.phone }}</router-link>
                     </td>
-                    <td>{{ contact.favorite ? 'Favorite' : '' }}</td>
+                    <td>
+                        <a v-bind:class="{ 'link-danger': contact.favorite,'link-success': !contact.favorite,  }" href="#" @click.prevent="updateFavorite(contact.id, contact.favorite)">
+                            {{ contact.favorite ? 'Remove to favorite' : 'Add to favorite' }}
+                        </a>
+                    </td>
                     <td><router-link :to="{ name: 'contact.update', params: {id:contact.id}}">Update</router-link></td>
                     <td><a class="link-danger" href="#" @click.prevent="deleteContact(contact.id)" >Delete</a></td>
                 </tr>
@@ -77,6 +81,14 @@ export default {
         },
         atFavorite() {
             this.$router.push({name: 'contact.favorite'})
+        },
+        updateFavorite(id, favorite) {
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.patch(`/api/v1/contact/favorite/${id}`, {favorite: !favorite})
+                    .then(r => {
+                        this.getData();
+                    })
+            })
         },
         deleteContact(id) {
             axios.get('/sanctum/csrf-cookie').then(response => {

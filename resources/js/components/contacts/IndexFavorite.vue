@@ -11,7 +11,6 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Phone number</th>
-                    <th>Favorite</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -21,7 +20,6 @@
                     <td>
                         <router-link :to="{ name: 'contact.show', params: {id:contact.id}}"> {{ contact.phone }}</router-link>
                     </td>
-                    <td>{{ contact.favorite ? 'Favorite' : '' }}</td>
                 </tr>
                 </tbody>
             </table>
