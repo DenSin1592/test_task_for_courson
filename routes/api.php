@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,4 @@ Route::middleware('auth:sanctum')->group(static function() {
 
 });
 
-Route::get('{url}', static function() { return \Response::json([], 404);})->where('url', '.*');
+Route::get('{url}', static function() { return \Response::json([], ResponseAlias::HTTP_NOT_FOUND);})->where('url', '.*');

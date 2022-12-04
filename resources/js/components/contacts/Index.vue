@@ -13,6 +13,7 @@
                     <th>Name</th>
                     <th>Phone number</th>
                     <th>Favorite</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,6 +24,7 @@
                         <router-link :to="{ name: 'contact.show', params: {id:contact.id}}"> {{ contact.phone }}</router-link>
                     </td>
                     <td>{{ contact.favorite ? 'Favorite' : '' }}</td>
+                    <td><router-link :to="{ name: 'contact.update', params: {id:contact.id}}">Редактировать</router-link></td>
                 </tr>
                 </tbody>
             </table>

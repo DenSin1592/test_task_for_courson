@@ -29,9 +29,21 @@ class ContactRepository extends AbstractRepository
     }
 
 
-    public function create(array $data): void
+    public function create(array $data): Model
     {
-        $this->getBuilder()->create($data);
+        return $this->getBuilder()->create($data);
+    }
+
+
+    public function update(int $id, array $data): Model
+    {
+        $model = $this->getBuilder()
+            ->where('id', $id)
+            ->where('user_id', \Auth::id())
+            ->first();
+        $model->update($data);
+
+        return $model;
     }
 
 

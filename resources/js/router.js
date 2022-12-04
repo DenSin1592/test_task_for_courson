@@ -42,6 +42,10 @@ const router = new VueRouter({
             path: '/contact/:id', component: () => import('./components/contacts/Show'),
             name: 'contact.show'
         },
+        {
+            path: '/contact/update/:id', component: () => import('./components/contacts/Update'),
+            name: 'contact.update'
+        },
 
     ]
 });

@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactRequest;
 use App\Http\Resources\ContactResource;
 use App\Repositories\ContactRepository;
-use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 
 class ContactsController extends Controller
@@ -33,46 +33,47 @@ class ContactsController extends Controller
      *     ),
      * )
      */
-    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(): \Illuminate\Http\JsonResponse
     {
         $cont = $this->contactRepository->allForUser();
 
-        return ContactResource::collection($cont);
+        return ContactResource::collection($cont)
+            ->response()
+            ->setStatusCode(ResponseAlias::HTTP_OK);
     }
 
 
-    public function indexFavorite(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function indexFavorite(): \Illuminate\Http\JsonResponse
     {
         $cont = $this->contactRepository->allFavoriteForUser();
 
-        return ContactResource::collection($cont);
+        return ContactResource::collection($cont)
+            ->response()
+            ->setStatusCode(ResponseAlias::HTTP_OK);
     }
 
 
     public function store(ContactRequest $request): \Illuminate\Http\JsonResponse
     {
-        $this->contactRepository->create($request->validated());
-
-        return \Response::json([], 204);
+        return (new ContactResource($this->contactRepository->create($request->validated())))
+        ->response()
+        ->setStatusCode(ResponseAlias::HTTP_CREATED);
     }
 
 
-    public function show(int $id): ContactResource
+    public function show(int $id): \Illuminate\Http\JsonResponse
     {
-        return new ContactResource($this->contactRepository->findOrFail($id));
+        return (new ContactResource($this->contactRepository->findOrFail($id)))
+            ->response()
+            ->setStatusCode(ResponseAlias::HTTP_OK);
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(ContactRequest $request, int $id): \Illuminate\Http\JsonResponse
     {
-
+        return (new ContactResource($this->contactRepository->update($id, $request->validated())))
+            ->response()
+            ->setStatusCode(ResponseAlias::HTTP_OK);
     }
 
     /**
